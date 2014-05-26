@@ -43,10 +43,10 @@ public class Main {
 		}
 
 		/**
-		 * <EntityConverter>.....</EntityConverter>
+		 * TODO: Modifyの実現方法
+		 * <CodeModify>.....</CodeModify>
 		 * とかでやるか
-		 *
-		 * @EntityModify を打ちまくってこれがあったら次の行が対象みたいにするか
+		 * それとも//CodeModify などを打ちまくってこれがあったら次の行が対象みたいにするか
 		 */
 		private EntityModify createEntityModify(List<Query> queries) {
 				StringBuilder namedQueryBuilder = new StringBuilder();
@@ -94,8 +94,13 @@ public class Main {
 				String namedQueries;
 				String staticQueryNames;
 				String staticParamNames;
-				String methods;
+				FacadeModify facadeModify;
 
+		}
+
+		// TODO: Facadeのメソッドの生成
+		class FacadeModify {
+				String methods;
 		}
 
 }
