@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<returnEntity>
+	<className>entity.Message</className>
+	<queries>
+		<name>findSample</name>
+	       <author>saiki</author>
+		<desc>
+			これはサンプルです
+		</desc>
+		<statement>
+			select * from
+			tab where a =
+			:param1 b = :param2
+		</statement>
+				<parameters>
+						<name>param1</name>
+						<type>String</type>
+				</parameters>
+				<parameters>
+						<name>param2</name>
+						<type>UserAccount</type>
+				</parameters>
+	</queries>
+	<queries>
+		<name>SAMPLE_QUERY2</name>
+	       <author>saiki</author>
+		<desc>
+			これもサンプルです
+		</desc>
+		<statement>
+			select * from
+			tab where a =
+			param1 = param2
+		</statement>
+	</queries>
+</returnEntity>
