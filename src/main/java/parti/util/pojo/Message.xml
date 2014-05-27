@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <returnEntity>
-	<className>entity.Message</className>
+	<className>Message</className>
 	<queries>
 		<name>findSample</name>
 	       <author>saiki</author>
@@ -22,7 +22,7 @@
 				</parameters>
 	</queries>
 	<queries>
-		<name>SAMPLE_QUERY2</name>
+		<name>findNotAccessMessage</name>
 	       <author>saiki</author>
 		<desc>
 			これもサンプルです
