@@ -125,12 +125,16 @@ public class CodeModify {
 				.append("}\n\n");
 		}
 		ModifyParts modify = new ModifyParts();
-		modify.namedQueries = namedQueryBuilder.toString().replaceAll("^", MODIFY_MARK).replaceAll("\n", "\n" + MODIFY_MARK);
-		modify.staticQueryNames = staticQueryNameBuilder.toString().replaceAll("^", MODIFY_MARK).replaceAll("\n", "\n" + MODIFY_MARK);
-		modify.staticParamNames = staticParamNameBuilder.toString().replaceAll("^", MODIFY_MARK).replaceAll("\n", "\n" + MODIFY_MARK);
-		modify.methods = methodBuilder.toString().replaceAll("^", MODIFY_MARK).replaceAll("\n", "\n" + MODIFY_MARK);
+		modify.namedQueries = addModifyMark(namedQueryBuilder.toString());
+		modify.staticQueryNames = addModifyMark(staticQueryNameBuilder.toString());
+		modify.staticParamNames = addModifyMark(staticParamNameBuilder.toString());
+		modify.methods = addModifyMark(methodBuilder.toString());
 
 		return modify;
+	}
+
+	public static String addModifyMark(String org){
+		return org.replaceAll("^", MODIFY_MARK).replaceAll("\n", "\n" + MODIFY_MARK);
 	}
 
 	/**

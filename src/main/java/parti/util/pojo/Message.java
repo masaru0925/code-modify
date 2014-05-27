@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package parti.util.pojo;
 
 /**
@@ -13,21 +12,33 @@ package parti.util.pojo;
 //@NamedQuery
 //@NamedQuery
 //@NamedQuery
-/**@code-modify*///@NamedQuery
-/**@code-modify*///@NamedQuery
-/**@code-modify*///@NamedQuery
+/**
+ * @code-modify
+ *///@NamedQuery
+/**
+ * @code-modify
+ *///@NamedQuery
+/**
+ * @code-modify
+ *///@NamedQuery
 public class Message {
+
 	//@OneToMany
-	public static void oneToMany1(){
-	 String a = new String();
+
+	public static void oneToMany1() {
+		String a = new String();
 	}
-			//@OneToMany
-	public static void oneToMany2(){
-	 String a = new String();
+
+	//@OneToMany
+
+	public static void oneToMany2() {
+		String a = new String();
 	}
-			//@ManyToOne
-	public static void manyToOne1(){
-	 String a = new String();
+
+	//@ManyToOne
+
+	public static void manyToOne1() {
+		String a = new String();
 	}
-	
+
 }
