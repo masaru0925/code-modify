@@ -43,34 +43,17 @@ public class Main {
 
 				ReturnEntity entity = JAXB.unmarshal(file, ReturnEntity.class);
 				ModifyParts modifyParts = modify.createModifyParts(entity);
-				LOG.log(Level.INFO, modifyParts.namedQueries);
-				LOG.log(Level.INFO, modifyParts.staticQueryNames);
-				LOG.log(Level.INFO, modifyParts.staticParamNames);
-				LOG.log(Level.INFO, modifyParts.methods);
 
 				List<String> orgEntityLines = Files.readAllLines(Paths.get(entitySourcePath), Charset.forName("UTF-8"));
 				List<String> orgFacadeLines = Files.readAllLines(Paths.get(facadeSourcePath), Charset.forName("UTF-8"));
-				List<String> cleanEntityLines = new ArrayList<>();
-				List<String> cleanFacadeLines = new ArrayList<>();
+				List<String> modifiedEntityLines = CodeModify.modifyEntity(orgEntityLines, modifyParts);
+				List<String> modifiedFacadeLines = CodeModify.modifyFacade(orgFacadeLines, modifyParts);
 
-				// CLEANING
-				for(String line: orgEntityLines){
-						if(!line.startsWith(CodeModify.MODIFY_MARK)){
-								cleanEntityLines.add(line);
-						}
-				}
-				for(String line: orgFacadeLines){
-						if(!line.startsWith(CodeModify.MODIFY_MARK)){
-								cleanFacadeLines.add(line);
-						}
-				}
 				//Files.write(Paths.get(entitySourcePath), cleanEntityLines, Charset.forName("UTF-8"));
 				//Files.write(Paths.get(facadeSourcePath), cleanFacadeLines, Charset.forName("UTF-8"));
 
-				// ENTTIY
-				// TODO: CLASSDEF_PATTERN-> MODIFY_MARK, NamedQuery , [line], static queryname, static paramname
-				// TODO: ONETOMANY_PATTERN -> MODIFY_MARK, ANNOTATION, [line]
-				// TODO: MANYTOONE_PATTERN -> MODIFY_MARK, ANNOTATION, [line]
+				LOG.log(Level.INFO, String.join("\n",modifiedEntityLines));
+				LOG.log(Level.INFO, String.join("\n",modifiedFacadeLines));
 
 				// FACADE
 				// TODO: CLASSDEF_PATTERN-> [line], MODIFY_MARK, method

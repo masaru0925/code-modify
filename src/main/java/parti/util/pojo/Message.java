@@ -10,12 +10,24 @@ package parti.util.pojo;
  *
  * @author msaiki
  */
+//@NamedQuery
+//@NamedQuery
+//@NamedQuery
 /**@code-modify*///@NamedQuery
 /**@code-modify*///@NamedQuery
 /**@code-modify*///@NamedQuery
 public class Message {
-/**@code-modify*/public static void aaa(){
-/**@code-modify*/ String a = new String();
-/**@code-modify*/}
+	//@OneToMany
+	public static void oneToMany1(){
+	 String a = new String();
+	}
+			//@OneToMany
+	public static void oneToMany2(){
+	 String a = new String();
+	}
+			//@ManyToOne
+	public static void manyToOne1(){
+	 String a = new String();
+	}
 	
 }

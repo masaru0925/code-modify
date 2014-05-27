@@ -30,7 +30,11 @@
 		<statement>
 			select * from
 			tab where a =
-			param1 = param2
+			param1 = :paramX
+			and
+			param2 = :paramY
+			or
+			param3 in :paramZ
 		</statement>
 				<parameters>
 						<name>paramX</name>
