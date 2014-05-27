@@ -32,5 +32,17 @@
 			tab where a =
 			param1 = param2
 		</statement>
+				<parameters>
+						<name>paramX</name>
+						<type>String</type>
+				</parameters>
+				<parameters>
+						<name>paramY</name>
+						<type>UserAccount</type>
+				</parameters>
+				<parameters>
+						<name>paramZ</name>
+						<type>List&lt;XXEntity&gt;</type>
+				</parameters>
 	</queries>
 </returnEntity>

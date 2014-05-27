@@ -53,18 +53,26 @@ public class Main {
 				List<String> cleanEntityLines = new ArrayList<>();
 				List<String> cleanFacadeLines = new ArrayList<>();
 
+				// CLEANING
 				for(String line: orgEntityLines){
 						if(!line.startsWith(CodeModify.MODIFY_MARK)){
 								cleanEntityLines.add(line);
 						}
 				}
-				Files.write(Paths.get(entitySourcePath), cleanEntityLines, Charset.forName("UTF-8"));
-
 				for(String line: orgFacadeLines){
 						if(!line.startsWith(CodeModify.MODIFY_MARK)){
 								cleanFacadeLines.add(line);
 						}
 				}
-				Files.write(Paths.get(facadeSourcePath), cleanFacadeLines, Charset.forName("UTF-8"));
+				//Files.write(Paths.get(entitySourcePath), cleanEntityLines, Charset.forName("UTF-8"));
+				//Files.write(Paths.get(facadeSourcePath), cleanFacadeLines, Charset.forName("UTF-8"));
+
+				// ENTTIY
+				// TODO: CLASSDEF_PATTERN-> MODIFY_MARK, NamedQuery , [line], static queryname, static paramname
+				// TODO: ONETOMANY_PATTERN -> MODIFY_MARK, ANNOTATION, [line]
+				// TODO: MANYTOONE_PATTERN -> MODIFY_MARK, ANNOTATION, [line]
+
+				// FACADE
+				// TODO: CLASSDEF_PATTERN-> [line], MODIFY_MARK, method
 		}
 }

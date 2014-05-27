@@ -5,17 +5,8 @@
  */
 package parti.util;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.xml.bind.JAXB;
-import javax.xml.bind.JAXBException;
 import parti.util.pojo.Parameter;
 import parti.util.pojo.Query;
 import parti.util.pojo.ReturnEntity;
@@ -28,6 +19,12 @@ public class CodeModify {
 	private static final Logger LOG = Logger.getLogger(CodeModify.class.getName());
 
 		public static final String MODIFY_MARK = "/**@code-modify*/";
+		public static final String JSONMANAGEDREF_ANNOTATION = "@JsonManagedReference";
+		public static final String JSONBACKREF_ANNOTATION = "@JsonBackReference";
+		public static final String CLASSDEF_PATTERN = "^public class ";
+		public static final String ONETOMANY_PATTERN = "^[ \t]+@OneToMany";
+		public static final String MANYTOONE_PATTERN = "^[ \t]+@ManyToOne";
+
 
 		/**
 		 * TODO: Modifyの実現方法
@@ -41,16 +38,19 @@ public class CodeModify {
 				StringBuilder staticParamNameBuilder = new StringBuilder();
 				StringBuilder methodBuilder = new StringBuilder();
 				StringBuilder staticQueryName_VarNameBuilder = new StringBuilder()
-						.append(entity.getClassName())
-						.append(".QUERY_");
-				StringBuilder staticParamName_VarNameBuilder = new StringBuilder()
-						.append(entity.getClassName())
-						.append(".PARAM_");
+//						.append(entity.getClassName())
+						.append("QUERY_");
 
 				for (Query query : queries) {
+						StringBuilder staticParamName_VarNameBuilder = new StringBuilder()
+//							.append(entity.getClassName())
+							.append("PARAM_")
+							.append(query.getName())
+							.append("_")
+							;
 						StringBuilder methodSetParamBuilder = new StringBuilder();
-						staticQueryName_VarNameBuilder
-								.append(query.getName());
+//						staticQueryName_VarNameBuilder
+//								.append(query.getName());
 						namedQueryBuilder
 								.append("@NamedQuery(name=\"")
 								.append(query.getName())
@@ -62,6 +62,7 @@ public class CodeModify {
 						staticQueryNameBuilder
 								.append("public static final String ")
 								.append(staticQueryName_VarNameBuilder.toString())
+								.append(query.getName())
 								.append(" = \"")
 								.append(query.getName())
 								.append("\";\n");
@@ -75,11 +76,12 @@ public class CodeModify {
 						// TODO: Parameterも使ってメソッドを作る
 						if (null != query.getParameters()) {
 								for (Parameter param : query.getParameters()) {
-										staticParamName_VarNameBuilder
-												.append(param.getName());
+//										staticParamName_VarNameBuilder
+//												.append(param.getName());
 										staticParamNameBuilder
 												.append("public static final String ")
 												.append(staticParamName_VarNameBuilder.toString())
+												.append(param.getName())
 												.append(" = \"")
 												.append(param.getName())
 												.append("\";\n");
@@ -90,7 +92,10 @@ public class CodeModify {
 												.append(", ");
 										methodSetParamBuilder
 												.append("\tquery.setParam(")
+												.append(entity.getClassName())
+												.append(".")
 												.append(staticParamName_VarNameBuilder.toString())
+												.append(param.getName())
 												.append(", ")
 												.append(param.getName())
 												.append(");\n");
@@ -99,7 +104,10 @@ public class CodeModify {
 						methodBuilder
 								.append("){\n")
 								.append("\tQuery query = getEntityManager().createNamedQuery(")
+								.append(entity.getClassName())
+								.append(".")
 								.append(staticQueryName_VarNameBuilder.toString())
+								.append(query.getName())
 								.append(", ")
 								.append(entity.getClassName())
 								.append(".class);\n")
