@@ -28,25 +28,30 @@ public class Main {
 
 				private static final Logger LOG = Logger.getLogger(Main.class.getName());
 
+				/**
+				 * 
+				 * @param args xmlDir entityDir facadeDir
+				 * @throws IOException
+				 * @throws JAXBException
+				 * @throws ClassNotFoundException 
+				 */
 				public static void main(String args[]) throws IOException, JAXBException, ClassNotFoundException {
-				// TODO: activate -------------------------------------------->
-								// TODO: String queryXMLDirectory = args[0];
-								// TODO: String entityDirectory = args[1];
-								// TODO: String facadeDirectory = args[2];
-								// <-----------------------------------------------------------
-								// TODO: remove ---------------------------------------------->
-								String filePath = "src/main/java/parti/util/pojo/Message.xml";
-//								String entitySourcePath = filePath.replaceAll(".xml", ".java");
-//								String facadeSourcePath = filePath.replaceAll(".xml", "Facade.java");
-//								File file = new File(filePath);
-								// <----------------------------------------------------------
-
-								String xmlDir = //args[0];
-												"src/main/java/parti/util/pojo";
-								String entityDir = //args[1];
-												"src/main/java/parti/util/pojo";
-								String facadeDir = //args[2];
-												"src/main/java/parti/util/pojo";
+								String xmlDir = args[0];
+								//				"src/main/java/parti/util/pojo";
+								String entityDir = new String();
+								//				"src/main/java/parti/util/pojo";
+								String facadeDir = new String();
+								//				"src/main/java/parti/util/pojo";
+								if(1==args.length){
+								  entityDir = xmlDir;
+								  facadeDir = xmlDir;
+								}else if(2==args.length){
+								  entityDir = xmlDir;
+								  facadeDir = args[1];
+								}else if(3==args.length){
+								  entityDir = args[1];
+								  facadeDir = args[2];
+								}
 
 								//modify(filePath);
 								File xmlDirFile = new File(xmlDir);

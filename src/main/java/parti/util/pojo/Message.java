@@ -12,15 +12,6 @@ package parti.util.pojo;
 //@NamedQuery
 //@NamedQuery
 //@NamedQuery
-/**
- * @code-modify
- *///@NamedQuery
-/**
- * @code-modify
- *///@NamedQuery
-/**
- * @code-modify
- *///@NamedQuery
 /**@code-modify*/@NamedQuery(name="findSample", query="            select * from            tab where a =            :param1 b = :param2        ")
 /**@code-modify*/@NamedQuery(name="findNotAccessMessage", query="            select * from            tab where a =            param1 = :paramX            and            param2 = :paramY            or            param3 in :paramZ        ")
 /**@code-modify*/
