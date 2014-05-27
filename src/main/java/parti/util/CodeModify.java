@@ -25,9 +25,10 @@ public class CodeModify {
 		public static final String JSONMANAGEDREF_ANNOTATION = MODIFY_MARK + "@JsonManagedReference";
 		public static final String JSONBACKREF_ANNOTATION = MODIFY_MARK + "@JsonBackReference";
 
-		public static Pattern CLASSDEF_PATTERN = Pattern.compile("public class ");
-		public static Pattern ONETOMANY_PATTERN = Pattern.compile("@OneToMany");
-		public static Pattern MANYTOONE_PATTERN = Pattern.compile("@ManyToOne");
+		public static Pattern NAMEDQUERIES_PATTERN = Pattern.compile("^@NamedQueries");
+		public static Pattern CLASSDEF_PATTERN = Pattern.compile("^public class ");
+		public static Pattern ONETOMANY_PATTERN = Pattern.compile("^[ \t]+@OneToMany");
+		public static Pattern MANYTOONE_PATTERN = Pattern.compile("^[ \t]+@ManyToOne");
 	//public static Pattern ONETOMANY_PATTERN = Pattern.compile("^[ \t]+@OneToMany");
 		//public static Pattern MANYTOONE_PATTERN = Pattern.compile("^[ \t]+@ManyToOne");
 
@@ -56,14 +57,14 @@ public class CodeModify {
 //						staticQueryName_VarNameBuilder
 //								.append(query.getName());
 						namedQueryBuilder
-								.append("@NamedQuery(name=\"")
+								.append("\t@NamedQuery(name=\"")
 								.append(query.getName())
 								.append("\", query=\"")
 								.append(query.getStatement()
 										.replaceAll("\r\n", "")
 										.replaceAll("\n", "")
 										.replaceAll("[ \t]+", " "))
-								.append("\")\n");
+								.append("\"),\n");
 						staticQueryNameBuilder
 								.append("public static final String ")
 								.append(staticQueryName_VarNameBuilder.toString())
@@ -100,7 +101,7 @@ public class CodeModify {
 												methodBuilder.append(", ");
 										}
 										methodSetParamBuilder
-												.append("\tquery.setParam(")
+												.append("\tquery.setParameter(")
 												.append(entity.getClassName())
 												.append(".")
 												.append(staticParamName_VarNameBuilder.toString())
@@ -176,8 +177,10 @@ public class CodeModify {
 				List<String> cleanLines = cleaning(lines);
 				List<String> modifiedLines = new ArrayList<>();
 				for (String line : cleanLines) {
-						if (CLASSDEF_PATTERN.matcher(line).find()) {
+						if (NAMEDQUERIES_PATTERN.matcher(line).find()) {
+								modifiedLines.add(line);
 								modifiedLines.add(modifyParts.namedQueries);
+						}else if (CLASSDEF_PATTERN.matcher(line).find()) {
 								modifiedLines.add(line);
 								modifiedLines.add(modifyParts.staticQueryNames);
 								modifiedLines.add(modifyParts.staticParamNames);
