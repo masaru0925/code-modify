@@ -124,13 +124,13 @@ public class CodeModify {
 				.append("\treturn query.getResultList();\n")
 				.append("}\n\n");
 		}
-		ModifyParts modify = new ModifyParts();
-		modify.namedQueries = addModifyMark(namedQueryBuilder.toString());
-		modify.staticQueryNames = addModifyMark(staticQueryNameBuilder.toString());
-		modify.staticParamNames = addModifyMark(staticParamNameBuilder.toString());
-		modify.methods = addModifyMark(methodBuilder.toString());
+		ModifyParts modifyParts = new ModifyParts();
+		modifyParts.namedQueries = addModifyMark(namedQueryBuilder.toString());
+		modifyParts.staticQueryNames = addModifyMark(staticQueryNameBuilder.toString());
+		modifyParts.staticParamNames = addModifyMark(staticParamNameBuilder.toString());
+		modifyParts.methods = addModifyMark(methodBuilder.toString());
 
-		return modify;
+		return modifyParts;
 	}
 
 	public static String addModifyMark(String org){
