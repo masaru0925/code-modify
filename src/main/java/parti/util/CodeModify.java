@@ -75,7 +75,10 @@ public class CodeModify {
 
 						// TODO: Parameterも使ってメソッドを作る
 						if (null != query.getParameters()) {
-								for (Parameter param : query.getParameters()) {
+								int lastIndex = query.getParameters().size()-1;
+								for( int index=0; index<=lastIndex; index++){
+//								for (Parameter param : query.getParameters()) {
+										Parameter param = query.getParameters().get(index);
 //										staticParamName_VarNameBuilder
 //												.append(param.getName());
 										staticParamNameBuilder
@@ -89,7 +92,10 @@ public class CodeModify {
 												.append(param.getType())
 												.append(" ")
 												.append(param.getName())
-												.append(", ");
+												;
+												if(index != lastIndex){
+													methodBuilder.append(", ");
+												}
 										methodSetParamBuilder
 												.append("\tquery.setParam(")
 												.append(entity.getClassName())
@@ -102,6 +108,7 @@ public class CodeModify {
 								}
 						}
 						methodBuilder
+								.append(methodBuilder)
 								.append("){\n")
 								.append("\tQuery query = getEntityManager().createNamedQuery(")
 								.append(entity.getClassName())
