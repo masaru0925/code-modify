@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package parti.util.pojo;
 
 /**
@@ -11,31 +10,32 @@ package parti.util.pojo;
  * @author masaru
  */
 public class Parameter {
-		private String name;
-		private String type;
 
-		public Parameter() {
-		}
+	private String name;
+	private String type;
 
-		@Override
-		public String toString() {
-				return "Parameter{" + "name=" + name + ", type=" + type + '}';
-		}
+	public Parameter() {
+	}
 
-		public String getName() {
-				return name;
-		}
+	@Override
+	public String toString() {
+		return "Parameter{" + "name=" + name + ", type=" + type + '}';
+	}
 
-		public void setName(String name) {
-				this.name = name;
-		}
+	public String getName() {
+		return name;
+	}
 
-		public String getType() {
-				return type;
-		}
+	public void setName(String name) {
+		this.name = name;
+	}
 
-		public void setType(String type) {
-				this.type = type;
-		}
-		
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
 }

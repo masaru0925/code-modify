@@ -13,31 +13,31 @@ import java.util.List;
  */
 public class ReturnEntity {
 
-		private String className;
-		private List<Query> queries;
+	private String className;
+	private List<Query> queries;
 
-		public ReturnEntity() {
-		}
+	public ReturnEntity() {
+	}
 
-		@Override
-		public String toString() {
-				return "ReturnEntity{" + "className=" + className + ", queries=" + queries + '}';
-		}
+	@Override
+	public String toString() {
+		return "ReturnEntity{" + "className=" + className + ", queries=" + queries + '}';
+	}
 
-		public String getClassName() {
-				return className;
-		}
+	public String getClassName() {
+		return className;
+	}
 
-		public void setClassName(String className) {
-				this.className = className;
-		}
+	public void setClassName(String className) {
+		this.className = className;
+	}
 
-		public List<Query> getQueries() {
-				return queries;
-		}
+	public List<Query> getQueries() {
+		return queries;
+	}
 
-		public void setQueries(List<Query> queries) {
-				this.queries = queries;
-		}
+	public void setQueries(List<Query> queries) {
+		this.queries = queries;
+	}
 
 }

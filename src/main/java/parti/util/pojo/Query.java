@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package parti.util.pojo;
 
 import java.util.List;
@@ -18,7 +17,6 @@ public class Query {
 	public String toString() {
 		return "Query{" + "name=" + name + ", author=" + author + ", desc=" + desc + ", statement=" + statement + ", parameters=" + parameters + '}';
 	}
-
 
 	public String getName() {
 		return name;
