@@ -39,6 +39,9 @@ public class CodeModify {
 		 */
 		public ModifyParts createModifyParts(ReturnEntity entity) {
 				List<Query> queries = entity.getQueries();
+				if(null == queries){
+						queries = new ArrayList<>();
+				}
 				StringBuilder namedQueryBuilder = new StringBuilder();
 				StringBuilder staticQueryNameBuilder = new StringBuilder();
 				StringBuilder staticParamNameBuilder = new StringBuilder();
