@@ -24,9 +24,11 @@ public class CodeModify {
 	public static final String MODIFY_MARK = "/**@code-modify*/";
 	public static final String JSONMANAGEDREF_ANNOTATION = MODIFY_MARK + "@JsonManagedReference";
 	public static final String JSONBACKREF_ANNOTATION = MODIFY_MARK + "@JsonBackReference";
+	public static final String ABSTRACT_FLUSH_METHOD = MODIFY_MARK + " public void flush(){ getEntityManager().flush(); }";
 
 	public static Pattern NAMEDQUERIES_PATTERN = Pattern.compile("^@NamedQueries");
 	public static Pattern CLASSDEF_PATTERN = Pattern.compile("^public class ");
+	public static Pattern ABSTRACT_CLASSDEF_PATTERN = Pattern.compile("^public abstract class");
 	public static Pattern ONETOMANY_PATTERN = Pattern.compile("^[ \t]+@OneToMany");
 	public static Pattern MANYTOONE_PATTERN = Pattern.compile("^[ \t]+@ManyToOne");
 	//public static Pattern ONETOMANY_PATTERN = Pattern.compile("^[ \t]+@OneToMany");
@@ -219,5 +221,26 @@ public class CodeModify {
 			}
 		}
 		return modifiedLines;
+	}
+
+
+	/**
+	 * modify abstract facade(add flush method)
+	 * @param lines
+	 * @return 
+	 */
+	public static List<String> modifyAbstractFacade(List<String> lines){
+		List<String> cleanLines = cleaning(lines);
+		List<String> modifiedLines = new ArrayList<>();
+		for (String line : cleanLines) {
+			if (ABSTRACT_CLASSDEF_PATTERN.matcher(line).find()) {
+				modifiedLines.add(line);
+				modifiedLines.add(ABSTRACT_FLUSH_METHOD);
+			} else {
+				modifiedLines.add(line);
+			}
+		}
+		return modifiedLines;
+
 	}
 }

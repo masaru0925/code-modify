@@ -12,6 +12,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.bind.JAXB;
 import javax.xml.bind.JAXBException;
@@ -23,6 +24,7 @@ import parti.util.pojo.ReturnEntity;
  * @author masaru
  */
 public class Main {
+	private static final String ABSTRACT_CLASSNAME = "AbstractFacade";
 
 	private static final Logger LOG = Logger.getLogger(Main.class.getName());
 
@@ -50,6 +52,11 @@ public class Main {
 			entityDir = args[1];
 			facadeDir = args[2];
 		}
+		Path abstractFacadeSourcePath = Paths.get(facadeDir+"/"+ABSTRACT_CLASSNAME+".java");
+		List<String> modifiedAbstractFacadeLines = CodeModify.modifyAbstractFacade(
+				Files.readAllLines(abstractFacadeSourcePath, Charset.forName("UTF-8"))
+		);
+		Files.write(abstractFacadeSourcePath, modifiedAbstractFacadeLines, Charset.forName("UTF-8"));
 
 		//modify(filePath);
 		File xmlDirFile = new File(xmlDir);
