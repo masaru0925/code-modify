@@ -13,6 +13,7 @@ import parti.util.pojo.Parameter;
 import parti.util.pojo.Query;
 import parti.util.pojo.ReturnEntity;
 
+// TODO: import文も処理対象に
 /**
  *
  * @author masaru
@@ -25,12 +26,15 @@ public class CodeModify {
 	public static final String JSONMANAGEDREF_ANNOTATION = MODIFY_MARK + "@JsonManagedReference";
 	public static final String JSONBACKREF_ANNOTATION = MODIFY_MARK + "@JsonBackReference";
 	public static final String ABSTRACT_FLUSH_METHOD = MODIFY_MARK + " public void flush(){ getEntityManager().flush(); }";
+	public static final String FACADE_IMPORT = MODIFY_MARK + "import java.util.List;\n"+MODIFY_MARK+"import javax.persistence.Query;\n";
+	public static final String ENTITY_IMPORT = MODIFY_MARK + "import com.fasterxml.jackson.annotation.JsonBackReference;\n"+MODIFY_MARK+"import com.fasterxml.jackson.annotation.JsonManagedReference;";
 
 	public static Pattern NAMEDQUERIES_PATTERN = Pattern.compile("^@NamedQueries");
 	public static Pattern CLASSDEF_PATTERN = Pattern.compile("^public class ");
 	public static Pattern ABSTRACT_CLASSDEF_PATTERN = Pattern.compile("^public abstract class");
 	public static Pattern ONETOMANY_PATTERN = Pattern.compile("^[ \t]+@OneToMany");
 	public static Pattern MANYTOONE_PATTERN = Pattern.compile("^[ \t]+@ManyToOne");
+	public static Pattern PKG_PATTERN = Pattern.compile("^package ");
 	//public static Pattern ONETOMANY_PATTERN = Pattern.compile("^[ \t]+@OneToMany");
 	//public static Pattern MANYTOONE_PATTERN = Pattern.compile("^[ \t]+@ManyToOne");
 
@@ -195,6 +199,9 @@ public class CodeModify {
 			} else if (MANYTOONE_PATTERN.matcher(line).find()) {
 				modifiedLines.add(JSONBACKREF_ANNOTATION);
 				modifiedLines.add(line);
+			} else if (PKG_PATTERN.matcher(line).find()) {
+				modifiedLines.add(line);
+				modifiedLines.add(ENTITY_IMPORT);
 			} else {
 				modifiedLines.add(line);
 			}
@@ -216,6 +223,9 @@ public class CodeModify {
 			if (CLASSDEF_PATTERN.matcher(line).find()) {
 				modifiedLines.add(line);
 				modifiedLines.add(modifyParts.methods);
+			} else if (PKG_PATTERN.matcher(line).find()) {
+				modifiedLines.add(line);
+				modifiedLines.add(FACADE_IMPORT);
 			} else {
 				modifiedLines.add(line);
 			}
